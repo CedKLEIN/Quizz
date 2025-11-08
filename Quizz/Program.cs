@@ -8,7 +8,6 @@ internal abstract class Program
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
         
-        Console.WriteLine("Hello World!");
         var contentService = new ContentService();
         var app = new App(contentService);
         await app.InitAsync();

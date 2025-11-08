@@ -8,6 +8,7 @@ namespace Quizz.Services;
 public class App(ContentService contentService)
 {
     private Node? _content;
+    private readonly List<string> _yesAnswers = ["yes", "y", "oui", "ui", "o"];
     
     public async Task InitAsync()
     {
@@ -81,11 +82,12 @@ public class App(ContentService contentService)
     private void ParseQuiz(Node node)
     {
         Console.Clear();
-        Console.WriteLine("(Use 'exit()' to leave the quiz)");
+        Console.WriteLine("Use 'exit()' to leave the quiz");
         
         var rnd = new Random();
         var children = node.Children.OrderBy(c => rnd.Next()).ToList();
         var successAnswer = 0;
+        var wrongAnswers = new List<Node>();
         for(var i = 0; i < children.Count; i++)
         {
             Console.WriteLine($"{i+1}/{children.Count+1} - {children[i].Question} ({children[i].Get<string>("continent")}) ?");
@@ -94,12 +96,12 @@ public class App(ContentService contentService)
             {
                 Console.WriteLine("Invalid choice. Press any key to try again...");
                 Console.ReadKey();
-                return;
+                continue;
             }
 
             if (input == "exit()")
             {
-                return;
+                break;
             }
 
             if (input == children[i].Answer)
@@ -109,6 +111,7 @@ public class App(ContentService contentService)
             }
             else
             {
+                wrongAnswers.Add(children[i]);
                 Console.WriteLine($"\n❌ - Incorrect, the answer is '{children[i].Answer}'\n");
             }
 
@@ -120,6 +123,20 @@ public class App(ContentService contentService)
         }
         
         Console.WriteLine($"Score final: {successAnswer}/{children.Count+1} réponses correctes !");
+
+        if (wrongAnswers.Count > 0)
+        {
+            Console.WriteLine("Veux-tu un sommaire des réponses fausses ?");
+            var responses = Console.ReadLine();
+            if(!string.IsNullOrEmpty(responses) && _yesAnswers.Contains(responses.ToLowerInvariant()))
+            {
+                Console.WriteLine("Réponses fausses:");
+                foreach (var wrongAnswer in wrongAnswers)
+                {
+                    Console.WriteLine($"❌ - {wrongAnswer.Question} - {wrongAnswer.Answer}");
+                }
+            }
+        }
         Console.ReadKey();
     }
 
