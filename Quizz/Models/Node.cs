@@ -6,7 +6,7 @@ using Quizz.Enums;
 namespace Quizz.Models;
 
 public sealed record Node(
-    [property: Description("title"), JsonPropertyName("title")] string Title,
+    [property: Description("name"), JsonPropertyName("name")] string Name,
     [property: Description("label"), JsonPropertyName("label")] string Label,
     [property: Description("type"), JsonPropertyName("type")] PageType Type
 )

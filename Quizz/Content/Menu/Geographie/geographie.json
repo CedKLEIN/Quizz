@@ -1,11 +1,11 @@
 [
   {
-    "title": "Capitals",
+    "name": "Capitals",
     "label": "Capitales",
     "type": "menu"
   },
   {
-    "title": "Countries",
+    "name": "Countries",
     "label": "Pays",
     "type": "menu"
   }

@@ -9,7 +9,8 @@ internal abstract class Program
         Console.OutputEncoding = System.Text.Encoding.UTF8;
         
         var contentService = new ContentService();
-        var app = new App(contentService);
+        var ruleEngineService = new RuleEngineService();
+        var app = new App(contentService, ruleEngineService);
         await app.InitAsync();
         app.Start();
     }

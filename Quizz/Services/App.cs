@@ -5,7 +5,7 @@ using Quizz.Models;
 
 namespace Quizz.Services;
 
-public class App(ContentService contentService)
+public class App(ContentService contentService, RuleEngineService ruleEngineService)
 {
     private Node? _content;
     private readonly List<string> _yesAnswers = ["yes", "y", "oui", "ui", "o"];
@@ -20,7 +20,7 @@ public class App(ContentService contentService)
         {
             throw new NullReferenceException("Content is null");
         }
-        await ParseChildAsync(_content, Path.Combine(contentService.RootContentPath, _content.Title));
+        await ParseChildAsync(_content, Path.Combine(contentService.RootContentPath, _content.Name));
         
         //DisplayNode(_content);
     }
@@ -82,7 +82,7 @@ public class App(ContentService contentService)
     private void ParseQuiz(Node node)
     {
         Console.Clear();
-        Console.WriteLine("Use 'exit()' to leave the quiz");
+        Console.WriteLine("Use 'exit()' to leave the quiz\n");
         
         var rnd = new Random();
         var children = node.Children.OrderBy(c => rnd.Next()).ToList();
@@ -90,7 +90,7 @@ public class App(ContentService contentService)
         var wrongAnswers = new List<Node>();
         for(var i = 0; i < children.Count; i++)
         {
-            Console.WriteLine($"{i+1}/{children.Count+1} - {children[i].Question} ({children[i].Get<string>("continent")}) ?");
+            Console.WriteLine($"{i+1}/{children.Count+1} - {children[i].Question} ({children[i].Get<string>("continent")}) ?\n");
             var input = Console.ReadLine();
             if (string.IsNullOrEmpty(input))
             {
@@ -142,8 +142,8 @@ public class App(ContentService contentService)
 
     private async Task ParseChildAsync(Node node, string path)
     {
-        var title = node.Title;
-        var childrenPath = contentService.ChildPath(path, title);
+        var name = node.Name;
+        var childrenPath = contentService.ChildPath(path, name);
 
         if (!File.Exists(childrenPath))
         {
@@ -159,13 +159,19 @@ public class App(ContentService contentService)
             Console.WriteLine($"Children for path {path} is null");
             return;
         }
+        
+        var conditions = node.Get<Conditions>("conditions");
+        if (conditions is not null)
+        {
+            children = children.Where(n => ruleEngineService.EvaluateConditions(conditions, n)).ToList();
+        }
             
         node.Children = children;
         if (node.Type == PageType.Menu)
         {
             foreach (var child in children)
             {
-                await ParseChildAsync(child, Path.Combine(path, child.Title));
+                await ParseChildAsync(child, Path.Combine(path, child.Name));
             }
         }
     }
@@ -173,8 +179,8 @@ public class App(ContentService contentService)
     private void DisplayNode(Node node, int level = 1)
     {
         var startLine = new string(' ', level);
-        Console.WriteLine($"{startLine}Starting level {level} for {node.Title}");
-        Console.WriteLine($"{startLine}title: {node.Title}");
+        Console.WriteLine($"{startLine}Starting level {level} for {node.Name}");
+        Console.WriteLine($"{startLine}name: {node.Name}");
         Console.WriteLine($"{startLine}label: {node.Label}");
         Console.WriteLine($"{startLine}Type: {node.Type.ToString()}");
 

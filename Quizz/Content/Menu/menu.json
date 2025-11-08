@@ -1,11 +1,11 @@
 ﻿[
   {
-    "title": "Geographie",
+    "name": "Geographie",
     "label": "Geographie",
     "type": "menu"
   },
   {
-    "title": "Histoire",
+    "name": "Histoire",
     "label": "Histoire",
     "type": "menu"
   }
