@@ -1,0 +1,12 @@
+﻿[
+  {
+    "title": "Geographie",
+    "label": "Geographie",
+    "type": "menu"
+  },
+  {
+    "title": "Histoire",
+    "label": "Histoire",
+    "type": "menu"
+  }
+]
