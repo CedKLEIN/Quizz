@@ -17,6 +17,8 @@ public sealed record Node(
     public string? Question => Get<string>("question");
     public string? Answer => Get<string>("answer");
     
+    public Conditions? Conditions => Get<Conditions>("conditions");
+    
     public T? Get<T>(string propertyName)
     {
         if (!Properties.TryGetValue(propertyName, out var element)) return default;

@@ -21,4 +21,7 @@
         <Using Include="NUnit.Framework"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Quizz\Quizz.csproj" />
+    </ItemGroup>
 </Project>

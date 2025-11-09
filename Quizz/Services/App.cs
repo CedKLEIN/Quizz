@@ -160,7 +160,7 @@ public class App(ContentService contentService, RuleEngineService ruleEngineServ
             return;
         }
         
-        var conditions = node.Get<Conditions>("conditions");
+        var conditions = node.Conditions;
         if (conditions is not null)
         {
             children = children.Where(n => ruleEngineService.EvaluateConditions(conditions, n)).ToList();
