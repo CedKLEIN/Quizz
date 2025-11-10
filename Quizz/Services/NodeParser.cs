@@ -1,40 +1,22 @@
-﻿using System.Text;
-using System.Text.Json;
-using Quizz.Enums;
+﻿using Quizz.Enums;
 using Quizz.Models;
 
 namespace Quizz.Services;
 
-public class App(ContentService contentService, RuleEngineService ruleEngineService)
+public class NodeParser(Node content)
 {
-    private Node? _content;
     private readonly List<string> _yesAnswers = ["yes", "y", "oui", "ui", "o"];
     
-    public async Task InitAsync()
+    public void Parse()
     {
-        var mainJson = contentService.MainPath;
-        var mainContent = await File.ReadAllTextAsync(mainJson);
-        _content = JsonSerializer.Deserialize<Node>(mainContent);
-
-        if (_content is null)
-        {
-            throw new NullReferenceException("Content is null");
-        }
-        await ParseChildAsync(_content, Path.Combine(contentService.RootContentPath, _content.Name));
-        
-        //DisplayNode(_content);
-    }
-
-    public void Start()
-    {
-        if (_content is null)
+        if (content is null)
         {
             throw new NullReferenceException("Content is null");
         }
 
         while (true)
         {
-            if (!ParseNode(_content))
+            if (!ParseNode(content))
                 break;
         }
     }
@@ -85,18 +67,17 @@ public class App(ContentService contentService, RuleEngineService ruleEngineServ
         Console.WriteLine("Use 'exit()' to leave the quiz\n");
         
         var rnd = new Random();
-        var children = node.Children.OrderBy(c => rnd.Next()).ToList();
+        var children = node.Children.OrderBy(_ => rnd.Next()).ToList();
         var successAnswer = 0;
         var wrongAnswers = new List<Node>();
         for(var i = 0; i < children.Count; i++)
         {
             Console.WriteLine($"{i+1}/{children.Count+1} - {children[i].Question} ({children[i].Get<string>("continent")}) ?\n");
             var input = Console.ReadLine();
-            if (string.IsNullOrEmpty(input))
+            while (string.IsNullOrEmpty(input))
             {
-                Console.WriteLine("Invalid choice. Press any key to try again...");
-                Console.ReadKey();
-                continue;
+                Console.WriteLine("Invalid choice. Please try again...");
+                input = Console.ReadLine();
             }
 
             if (input == "exit()")
@@ -135,58 +116,8 @@ public class App(ContentService contentService, RuleEngineService ruleEngineServ
                 {
                     Console.WriteLine($"❌ - {wrongAnswer.Question} - {wrongAnswer.Answer}");
                 }
+                Console.ReadKey();
             }
-        }
-        Console.ReadKey();
-    }
-
-    private async Task ParseChildAsync(Node node, string path)
-    {
-        var name = node.Name;
-        var childrenPath = contentService.ChildPath(path, name);
-
-        if (!File.Exists(childrenPath))
-        {
-            Console.WriteLine($"File {childrenPath} does not exist");
-            return;
-        }
-        
-        var childrenContent = await File.ReadAllTextAsync(childrenPath);
-        var children = JsonSerializer.Deserialize<List<Node>>(childrenContent);
-            
-        if (children is null)
-        {
-            Console.WriteLine($"Children for path {path} is null");
-            return;
-        }
-        
-        var conditions = node.Conditions;
-        if (conditions is not null)
-        {
-            children = children.Where(n => ruleEngineService.EvaluateConditions(conditions, n)).ToList();
-        }
-            
-        node.Children = children;
-        if (node.Type == PageType.Menu)
-        {
-            foreach (var child in children)
-            {
-                await ParseChildAsync(child, Path.Combine(path, child.Name));
-            }
-        }
-    }
-    
-    private void DisplayNode(Node node, int level = 1)
-    {
-        var startLine = new string(' ', level);
-        Console.WriteLine($"{startLine}Starting level {level} for {node.Name}");
-        Console.WriteLine($"{startLine}name: {node.Name}");
-        Console.WriteLine($"{startLine}label: {node.Label}");
-        Console.WriteLine($"{startLine}Type: {node.Type.ToString()}");
-
-        foreach (var child in node.Children)
-        {
-            DisplayNode(child, level + 1);
         }
     }
 }

@@ -24,4 +24,10 @@
     <ItemGroup>
       <ProjectReference Include="..\Quizz\Quizz.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="TestContent\**">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
 </Project>

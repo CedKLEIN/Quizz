@@ -1,8 +1,8 @@
 ﻿namespace Quizz.Services;
 
-public class ContentService
+public class ContentService(string baseDirectoryName = "Content")
 {
-    public string RootContentPath => Path.Combine(AppContext.BaseDirectory, "Content");
+    public string RootContentPath => Path.Combine(AppContext.BaseDirectory, baseDirectoryName);
     
     public string MainPath => Path.Combine(RootContentPath, "main.json");
     

@@ -32,6 +32,6 @@ public sealed record Node(
         }
     }
     
-    [JsonIgnore]
-    public List<Node> Children = [];
+    [JsonPropertyName("children")]
+    public List<Node>? Children { get; set; }
 }

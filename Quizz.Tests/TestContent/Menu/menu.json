@@ -1,0 +1,26 @@
+﻿[
+  {
+    "name": "Geography",
+    "label": "Geography",
+    "type": "menu",
+    "children": [
+      {
+        "name": "Capitals",
+        "label": "Capitals",
+        "type": "menu",
+        "children": [
+          {
+            "name": "Monde",
+            "label": "Toutes les capitales",
+            "type": "quiz",
+            "children": [
+              {"question": "Afghanistan", "answer": "Kaboul", "continent": "Asie", "type": "question"},
+              {"question": "Afrique du Sud", "answer": "Pretoria", "comment":"Pretoria (administrative), Le Cap (législative), Bloemfontein (judiciaire)", "continent": "Afrique", "type": "question"},
+              {"question": "Albanie", "answer": "Tirana", "continent": "Europe", "type": "question"}
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
