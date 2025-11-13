@@ -16,6 +16,7 @@ public sealed record Node(
 
     public string? Question => Get<string>("question");
     public string? Answer => Get<string>("answer");
+    public List<string>? MultipleAnswer => Get<List<string>>("answer");
     
     public Conditions? Conditions => Get<Conditions>("conditions");
     

@@ -8,7 +8,7 @@ public class NodeBuilderServiceTests
     [Test]
     public async Task Build()
     {
-        var nodeBuilderService = new NodeBuilderService(new ContentService("TestContent"), new RuleEngineService());
+        var nodeBuilderService = new NodeBuilderService(new ConsoleService(), new ContentService("TestContent"), new RuleEngineService());
         var rootNode = await nodeBuilderService.BuildAsync();
         
         Assert.That(rootNode, Is.Not.Null);

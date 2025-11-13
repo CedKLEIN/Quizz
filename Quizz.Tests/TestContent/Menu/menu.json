@@ -12,10 +12,11 @@
           {
             "name": "Monde",
             "label": "Toutes les capitales",
+            "sorted": false,
             "type": "quiz",
             "children": [
               {"question": "Afghanistan", "answer": "Kaboul", "continent": "Asie", "type": "question"},
-              {"question": "Afrique du Sud", "answer": "Pretoria", "comment":"Pretoria (administrative), Le Cap (législative), Bloemfontein (judiciaire)", "continent": "Afrique", "type": "question"},
+              {"question": "Afrique du Sud", "answer": "Pretoria", "comment":"Some comment", "continent": "Afrique", "type": "question"},
               {"question": "Albanie", "answer": "Tirana", "continent": "Europe", "type": "question"}
             ]
           }

@@ -1,10 +1,11 @@
 ﻿using System.Text.Json;
 using Quizz.Enums;
+using Quizz.Interfaces;
 using Quizz.Models;
 
 namespace Quizz.Services;
 
-public class NodeBuilderService(ContentService contentService, RuleEngineService ruleEngineService)
+public class NodeBuilderService(IConsole console, ContentService contentService, RuleEngineService ruleEngineService)
 {
     public async Task<Node> BuildAsync()
     {
@@ -38,7 +39,7 @@ public class NodeBuilderService(ContentService contentService, RuleEngineService
         var childrenPath = contentService.ChildPath(path, node.Name);
         if (!File.Exists(childrenPath))
         {
-            Console.WriteLine($"File {childrenPath} does not exist");
+            console.WriteLine($"File {childrenPath} does not exist");
             return [];
         }
         
@@ -47,7 +48,7 @@ public class NodeBuilderService(ContentService contentService, RuleEngineService
             
         if (children is null)
         {
-            Console.WriteLine($"Children for path {path} is null");
+            console.WriteLine($"Children for path {path} is null");
             return [];
         }
         
@@ -63,10 +64,10 @@ public class NodeBuilderService(ContentService contentService, RuleEngineService
     private void DisplayNode(Node node, int level = 1)
     {
         var startLine = new string(' ', level);
-        Console.WriteLine($"{startLine}Starting level {level} for {node.Name}");
-        Console.WriteLine($"{startLine}name: {node.Name}");
-        Console.WriteLine($"{startLine}label: {node.Label}");
-        Console.WriteLine($"{startLine}Type: {node.Type.ToString()}");
+        console.WriteLine($"{startLine}Starting level {level} for {node.Name}");
+        console.WriteLine($"{startLine}name: {node.Name}");
+        console.WriteLine($"{startLine}label: {node.Label}");
+        console.WriteLine($"{startLine}Type: {node.Type.ToString()}");
 
         foreach (var child in node.Children)
         {

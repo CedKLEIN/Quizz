@@ -13,4 +13,6 @@ public enum PageType
     Quiz,
     [Description("Usually the child of Quizz, question that need to be answer by the user.")]
     Question,
+    [Description("Question that need more that one response")]
+    QuestionMultipleResponses
 }
