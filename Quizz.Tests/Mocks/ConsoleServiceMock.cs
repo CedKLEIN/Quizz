@@ -15,9 +15,17 @@ public class ConsoleServiceMock: IConsole
     
     public void Clear() => _consoleText.AppendLine("*Console.Clear()*");
 
-    public void Write(string text = "") => _consoleText.Append(text);
+    public IConsole Write(string text = "")
+    {
+        _consoleText.Append(text);
+        return this;
+    }
 
-    public void WriteLine(string text = "") => _consoleText.AppendLine(text);
+    public IConsole WriteLine(string text = "")
+    {
+        _consoleText.AppendLine(text);
+        return this;
+    }
 
     public void ReadKey() => _consoleText.AppendLine("*Console.ReadKey()*");
 
@@ -26,5 +34,11 @@ public class ConsoleServiceMock: IConsole
         var input = _consoleLines.Dequeue();
         _consoleText.AppendLine(input);
         return input;
+    }
+
+    public IConsole BreakLine()
+    {
+        _consoleText.AppendLine();
+        return this;
     }
 }

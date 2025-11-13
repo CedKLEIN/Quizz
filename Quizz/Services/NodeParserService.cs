@@ -25,8 +25,8 @@ public class NodeParserService(IConsole console, Node content)
     private bool ParseNode(Node node)
     {
         console.Clear();
-        console.WriteLine(node.Label);
-        console.WriteLine();
+        console.WriteLine(node.Label)
+            .BreakLine();
 
         if (node.Children is null)
         {
@@ -38,11 +38,11 @@ public class NodeParserService(IConsole console, Node content)
             console.WriteLine($"{i + 1}. {node.Children[i].Label}");
         }
         
-        console.WriteLine("0. Exit");
-        console.WriteLine();
+        console.WriteLine("0. Exit")
+            .BreakLine();
         
         var input = console.ReadLine();
-        console.WriteLine();
+        console.BreakLine();
         if (!int.TryParse(input, out var choice) || choice < 0 || choice > node.Children.Count)
         {
             console.WriteLine("Invalid choice. Press any key to try again...");
@@ -73,8 +73,8 @@ public class NodeParserService(IConsole console, Node content)
     private void ParseQuiz(Node node)
     {
         console.Clear();
-        console.WriteLine("Use 'exit()' to leave the quiz");
-        console.WriteLine();
+        console.WriteLine("Use 'exit()' to leave the quiz")
+            .BreakLine();
 
         var sorted = node.Get<bool?>("sorted") ?? true;
         var children =  sorted ? SortChildrenRandomly(node) : node.Children;
@@ -82,8 +82,8 @@ public class NodeParserService(IConsole console, Node content)
         var wrongAnswers = new List<Node>();
         for(var i = 0; i < children.Count; i++)
         {
-            console.WriteLine($"{i+1}/{children.Count} - {children[i].Question} ?");
-            console.WriteLine();
+            console.WriteLine($"{i+1}/{children.Count} - {children[i].Question} ?")
+                .BreakLine();
             if (node.Children[i].Type == PageType.Question)
             {
                 var input = console.ReadLine();
@@ -101,17 +101,17 @@ public class NodeParserService(IConsole console, Node content)
                 if (input == children[i].Answer)
                 {
                     successAnswer++;
-                    console.WriteLine();
-                    console.WriteLine("✅ - Correct!");
+                    console.BreakLine()
+                        .WriteLine("✅ - Correct!");
                 }
                 else
                 {
                     wrongAnswers.Add(children[i]);
-                    console.WriteLine();
-                    console.WriteLine($"❌ - Incorrect, the answer is '{children[i].Answer}'");
+                    console.BreakLine()
+                        .WriteLine($"❌ - Incorrect, the answer is '{children[i].Answer}'");
                 }
 
-                console.WriteLine();
+                console.BreakLine();
             }
             else if(node.Children[i].Type == PageType.QuestionMultipleResponses)
             {
@@ -139,16 +139,15 @@ public class NodeParserService(IConsole console, Node content)
                     if (areEqual)
                     {
                         successAnswer++;
-                        console.WriteLine();
-                        console.WriteLine("✅ - Correct, all response are good!");
-                        console.WriteLine();
+                        console.BreakLine().WriteLine("✅ - Correct, all response are good!")
+                            .BreakLine();
                     }
                     else
                     {
                         wrongAnswers.Add(children[i]);
-                        console.WriteLine();
-                        console.Write("Missing responses:'");
-                        console.Write("❌  ");
+                        console.BreakLine()
+                            .Write("Missing responses:'")
+                            .Write("❌  ");
                         foreach (var goodAnswer in children[i].MultipleAnswer)
                         {
                             if (!answers.Contains(goodAnswer))

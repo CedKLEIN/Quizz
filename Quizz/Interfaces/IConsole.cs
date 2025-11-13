@@ -3,8 +3,9 @@
 public interface IConsole
 {
     public void Clear();
-    public void Write(string text = "");
-    public void WriteLine(string text = "");
+    public IConsole Write(string text = "");
+    public IConsole WriteLine(string text = "");
     public void ReadKey();
     public string? ReadLine();
+    public IConsole BreakLine();
 }
