@@ -7,6 +7,26 @@ namespace Quizz.Services;
 public class NodeParserService(IConsole console, Node content)
 {
     private readonly List<string> _yesAnswers = ["yes", "y", "oui", "ui", "o"];
+
+    private class Result
+    {
+        public bool Success { get; set; }
+    }
+    
+    private Result Parse(Node node)
+    {
+        switch (node.Type)
+        {
+            case PageType.Menu:
+                return ParseNode(node);
+            case PageType.Quiz:
+                return ParseQuiz(node);
+            case PageType.Question:
+            case PageType.QuestionMultipleResponses:
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
     
     public void Parse()
     {
@@ -17,20 +37,22 @@ public class NodeParserService(IConsole console, Node content)
 
         while (true)
         {
-            if (!ParseNode(content))
+            if (!ParseNode(content).Success)
                 break;
         }
     }
 
-    private bool ParseNode(Node node)
+    private Result ParseNode(Node node)
     {
+        var result = new Result();
+        
         console.Clear();
         console.WriteLine(node.Label)
             .BreakLine();
 
         if (node.Children is null)
         {
-            return false;
+            return result;
         }
         
         for (var i = 0; i < node.Children.Count; i++)
@@ -38,7 +60,7 @@ public class NodeParserService(IConsole console, Node content)
             console.WriteLine($"{i + 1}. {node.Children[i].Label}");
         }
         
-        console.WriteLine("0. Exit")
+        console.WriteLine("0. Back")
             .BreakLine();
         
         var input = console.ReadLine();
@@ -47,30 +69,19 @@ public class NodeParserService(IConsole console, Node content)
         {
             console.WriteLine("Invalid choice. Press any key to try again...");
             console.ReadKey();
-            return true;
+            result.Success = true;
+            return result;
         }
 
-        if (choice == 0) return false;
+        if (choice == 0) return result;
             
         var selectedChild = node.Children[choice - 1];
-        switch (selectedChild.Type)
-        {
-            case PageType.Menu:
-                ParseNode(selectedChild);
-                break;
-            case PageType.Quiz:
-                ParseQuiz(selectedChild);
-                break;
-            case PageType.Question:
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+        Parse(selectedChild);
         
-        return true;
+        return new Result { Success = true }; // true to not exist the application
     }
 
-    private void ParseQuiz(Node node)
+    private Result ParseQuiz(Node node)
     {
         console.Clear();
         console.WriteLine("Use 'exit()' to leave the quiz")
@@ -188,6 +199,8 @@ public class NodeParserService(IConsole console, Node content)
                 console.ReadKey();
             }
         }
+
+        return new Result { Success = true };
     }
 
     private static List<Node> SortChildrenRandomly(Node node)

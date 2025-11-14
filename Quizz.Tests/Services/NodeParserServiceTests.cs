@@ -22,7 +22,7 @@ public class NodeParserServiceTests
                                                     Which theme for the quiz ?
 
                                                     1. Geography
-                                                    0. Exit
+                                                    0. Back
 
                                                     0
                                                     
@@ -49,7 +49,7 @@ public class NodeParserServiceTests
                                                     Which theme for the quiz ?
                                                     
                                                     1. Geography
-                                                    0. Exit
+                                                    0. Back
                                                     
                                                     1
                                                     
@@ -57,7 +57,7 @@ public class NodeParserServiceTests
                                                     Geography
                                                     
                                                     1. Capitals
-                                                    0. Exit
+                                                    0. Back
                                                     
                                                     0
                                                     
@@ -65,7 +65,7 @@ public class NodeParserServiceTests
                                                     Which theme for the quiz ?
                                                     
                                                     1. Geography
-                                                    0. Exit
+                                                    0. Back
                                                     
                                                     0
                                                     
@@ -94,7 +94,7 @@ public class NodeParserServiceTests
                                                     Which theme for the quiz ?
                                                     
                                                     1. Geography
-                                                    0. Exit
+                                                    0. Back
                                                     
                                                     1
                                                     
@@ -102,7 +102,7 @@ public class NodeParserServiceTests
                                                     Geography
                                                     
                                                     1. Capitals
-                                                    0. Exit
+                                                    0. Back
                                                     
                                                     
                                                     
@@ -112,7 +112,7 @@ public class NodeParserServiceTests
                                                     Which theme for the quiz ?
                                                     
                                                     1. Geography
-                                                    0. Exit
+                                                    0. Back
                                                     
                                                     0
                                                     
@@ -146,7 +146,7 @@ public class NodeParserServiceTests
                                                     Which theme for the quiz ?
                                                     
                                                     1. Geography
-                                                    0. Exit
+                                                    0. Back
                                                     
                                                     1
                                                     
@@ -154,7 +154,7 @@ public class NodeParserServiceTests
                                                     Geography
                                                     
                                                     1. Capitals
-                                                    0. Exit
+                                                    0. Back
                                                     
                                                     1
                                                     
@@ -162,7 +162,7 @@ public class NodeParserServiceTests
                                                     Capitals
                                                     
                                                     1. Toutes les capitales
-                                                    0. Exit
+                                                    0. Back
                                                     
                                                     1
                                                     
@@ -203,7 +203,7 @@ public class NodeParserServiceTests
                                                     Which theme for the quiz ?
                                                     
                                                     1. Geography
-                                                    0. Exit
+                                                    0. Back
                                                     
                                                     0
                                                     
@@ -241,7 +241,7 @@ public class NodeParserServiceTests
                                                     Which theme for the quiz ?
                                                     
                                                     1. Geography
-                                                    0. Exit
+                                                    0. Back
                                                     
                                                     1
                                                     
@@ -249,7 +249,7 @@ public class NodeParserServiceTests
                                                     Geography
                                                     
                                                     1. Capitals
-                                                    0. Exit
+                                                    0. Back
                                                     
                                                     1
                                                     
@@ -257,7 +257,7 @@ public class NodeParserServiceTests
                                                     Capitals
                                                     
                                                     1. Toutes les capitales
-                                                    0. Exit
+                                                    0. Back
                                                     
                                                     1
                                                     
@@ -306,7 +306,7 @@ public class NodeParserServiceTests
                                                     Which theme for the quiz ?
                                                     
                                                     1. Geography
-                                                    0. Exit
+                                                    0. Back
                                                     
                                                     0
                                                     
@@ -339,7 +339,7 @@ public class NodeParserServiceTests
                                                     Which theme for the quiz ?
                                                     
                                                     1. Geography
-                                                    0. Exit
+                                                    0. Back
                                                     
                                                     1
                                                     
@@ -347,7 +347,7 @@ public class NodeParserServiceTests
                                                     Geography
                                                     
                                                     1. Capitals
-                                                    0. Exit
+                                                    0. Back
                                                     
                                                     1
                                                     
@@ -355,7 +355,7 @@ public class NodeParserServiceTests
                                                     Capitals
                                                     
                                                     1. Toutes les capitales
-                                                    0. Exit
+                                                    0. Back
                                                     
                                                     1
                                                     
@@ -379,7 +379,7 @@ public class NodeParserServiceTests
                                                     Which theme for the quiz ?
                                                     
                                                     1. Geography
-                                                    0. Exit
+                                                    0. Back
                                                     
                                                     0
                                                     
