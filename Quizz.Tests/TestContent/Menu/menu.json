@@ -21,6 +21,23 @@
             ]
           }
         ]
+      },
+      {
+        "name": "Countries",
+        "label": "Pays",
+        "type": "menu",
+        "children": [
+          {
+            "name": "Monde",
+            "label": "Trouver tous les pays d'un continent",
+            "type": "quiz",
+            "children": [
+              {
+                "question": "Quelles sont tous les pays d'Afriques", "answer": ["Maroc", "Tunisis", "Algerie"], "type": "questionMultipleResponses"
+              }
+            ]
+          }
+        ]
       }
     ]
   }

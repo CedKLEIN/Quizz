@@ -57,6 +57,7 @@ public class NodeParserServiceTests
                                                     Geography
                                                     
                                                     1. Capitals
+                                                    2. Pays
                                                     0. Back
                                                     
                                                     0
@@ -102,6 +103,7 @@ public class NodeParserServiceTests
                                                     Geography
                                                     
                                                     1. Capitals
+                                                    2. Pays
                                                     0. Back
                                                     
                                                     
@@ -154,6 +156,7 @@ public class NodeParserServiceTests
                                                     Geography
                                                     
                                                     1. Capitals
+                                                    2. Pays
                                                     0. Back
                                                     
                                                     1
@@ -249,6 +252,7 @@ public class NodeParserServiceTests
                                                     Geography
                                                     
                                                     1. Capitals
+                                                    2. Pays
                                                     0. Back
                                                     
                                                     1
@@ -347,6 +351,7 @@ public class NodeParserServiceTests
                                                     Geography
                                                     
                                                     1. Capitals
+                                                    2. Pays
                                                     0. Back
                                                     
                                                     1
@@ -375,6 +380,168 @@ public class NodeParserServiceTests
                                                     
                                                     Veux-tu un sommaire des réponses fausses ?
                                                     No
+                                                    *Console.Clear()*
+                                                    Which theme for the quiz ?
+                                                    
+                                                    1. Geography
+                                                    0. Back
+                                                    
+                                                    0
+                                                    
+                                                    
+                                                    """));
+    }
+    
+    [Test]
+    public async Task Menu_Quizz_QuestionMultipleResponses_FailedResponses()
+    {
+        var console = new ConsoleServiceMock();
+        var nodeBuilderService = new NodeBuilderService(console, new ContentService("TestContent"), new RuleEngineService());
+        var rootNode = await nodeBuilderService.BuildAsync();
+
+        var nodeParserService = new NodeParserService(console, rootNode);
+        
+        console.AddLine("1");
+        console.AddLine("2");
+        console.AddLine("1");
+        console.AddLine("Wrong answer");
+        console.AddLine("Maroc");
+        console.AddLine("Wrong answer");
+        console.AddLine("Yes");
+        console.AddLine("0");
+        nodeParserService.Parse();
+
+        Console.WriteLine(console.ConsoleText);
+        
+        Assert.That(console.ConsoleText, Is.EqualTo("""
+                                                    *Console.Clear()*
+                                                    Which theme for the quiz ?
+                                                    
+                                                    1. Geography
+                                                    0. Back
+                                                    
+                                                    1
+                                                    
+                                                    *Console.Clear()*
+                                                    Geography
+                                                    
+                                                    1. Capitals
+                                                    2. Pays
+                                                    0. Back
+                                                    
+                                                    2
+                                                    
+                                                    *Console.Clear()*
+                                                    Pays
+                                                    
+                                                    1. Trouver tous les pays d'un continent
+                                                    0. Back
+                                                    
+                                                    1
+                                                    
+                                                    *Console.Clear()*
+                                                    Use 'exit()' to leave the quiz
+                                                    
+                                                    1/1 - Quelles sont tous les pays d'Afriques ?
+                                                    
+                                                    3 answers needed (click on enter between each response)
+                                                    1 - Wrong answer
+                                                    2 - Maroc
+                                                    3 - Wrong answer
+                                                    
+                                                    Missing responses:'❌  Tunisis ; Algerie
+                                                    
+                                                    Score final: 0/1 réponses correctes !
+                                                    
+                                                    Veux-tu un sommaire des réponses fausses ?
+                                                    Yes
+                                                    
+                                                    Réponses fausses:
+                                                    ❌ - Quelles sont tous les pays d'Afriques - Maroc ; Tunisis ; Algerie
+                                                    
+                                                    *Console.ReadKey()*
+                                                    *Console.Clear()*
+                                                    Which theme for the quiz ?
+                                                    
+                                                    1. Geography
+                                                    0. Back
+                                                    
+                                                    0
+                                                    
+                                                    
+                                                    """));
+    }
+    
+    [Test]
+    public async Task Menu_Quizz_QuestionMultipleResponses()
+    {
+        var console = new ConsoleServiceMock();
+        var nodeBuilderService = new NodeBuilderService(console, new ContentService("TestContent"), new RuleEngineService());
+        var rootNode = await nodeBuilderService.BuildAsync();
+
+        var nodeParserService = new NodeParserService(console, rootNode);
+        
+        console.AddLine("1");
+        console.AddLine("2");
+        console.AddLine("1");
+        console.AddLine("Tunisis");
+        console.AddLine("Maroc");
+        console.AddLine("Algerie");
+        console.AddLine("Yes");
+        console.AddLine("0");
+        nodeParserService.Parse();
+
+        Console.WriteLine(console.ConsoleText);
+        
+        Assert.That(console.ConsoleText, Is.EqualTo("""
+                                                    *Console.Clear()*
+                                                    Which theme for the quiz ?
+                                                    
+                                                    1. Geography
+                                                    0. Back
+                                                    
+                                                    1
+                                                    
+                                                    *Console.Clear()*
+                                                    Geography
+                                                    
+                                                    1. Capitals
+                                                    2. Pays
+                                                    0. Back
+                                                    
+                                                    2
+                                                    
+                                                    *Console.Clear()*
+                                                    Pays
+                                                    
+                                                    1. Trouver tous les pays d'un continent
+                                                    0. Back
+                                                    
+                                                    1
+                                                    
+                                                    *Console.Clear()*
+                                                    Use 'exit()' to leave the quiz
+                                                    
+                                                    1/1 - Quelles sont tous les pays d'Afriques ?
+                                                    
+                                                    3 answers needed (click on enter between each response)
+                                                    1 - Tunisis
+                                                    2 - Maroc
+                                                    3 - Algerie
+                                                    
+                                                    ✅ - Correct, all response are good!
+                                                    
+                                                    Score final: 1/1 réponses correctes !
+                                                    *Console.Clear()*
+                                                    Which theme for the quiz ?
+                                                    
+                                                    1. Geography
+                                                    0. Back
+                                                    
+                                                    Yes
+                                                    
+                                                    Invalid choice. Press any key to try again...
+                                                    *Console.ReadKey()*
                                                     *Console.Clear()*
                                                     Which theme for the quiz ?
                                                     

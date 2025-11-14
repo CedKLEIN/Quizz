@@ -20,7 +20,7 @@ public class NodeBuilderServiceTests
             Assert.That(rootNode.Children, Has.Count.EqualTo(1));
             Assert.That(rootNode.Children[0].Name, Is.EqualTo("Geography"));
             Assert.That(rootNode.Children[0].Label, Is.EqualTo("Geography"));
-            Assert.That(rootNode.Children[0].Children, Has.Count.EqualTo(1));
+            Assert.That(rootNode.Children[0].Children, Has.Count.EqualTo(2));
             Assert.That(rootNode.Children[0].Type, Is.EqualTo(PageType.Menu));
             Assert.That(rootNode.Children[0].Children[0].Name, Is.EqualTo("Capitals"));
             Assert.That(rootNode.Children[0].Children[0].Label, Is.EqualTo("Capitals"));
@@ -42,7 +42,8 @@ public class NodeBuilderServiceTests
             Assert.That(rootNode.Children[0].Children[0].Children[0].Children[2].Answer, Is.EqualTo("Tirana"));
             Assert.That(rootNode.Children[0].Children[0].Children[0].Children[2].Type, Is.EqualTo(PageType.Question));
             Assert.That(rootNode.Children[0].Children[0].Children[0].Children[2].Get<string>("continent"), Is.EqualTo("Europe"));
-            
+            Assert.That(rootNode.Children[0].Children[1].Name, Is.EqualTo("Countries"));
+            // Too lazy to do this node
         });
     }
 }
