@@ -31,7 +31,9 @@ public class NodeParserService(IConsole console, Node content)
             case PageType.Quiz:
                 return ParseQuiz(node);
             case PageType.Question:
+                return ParseQuestion(node);
             case PageType.QuestionMultipleResponses:
+                return ParseQuestionMultipleResponses(node);
             default:
                 throw new ArgumentOutOfRangeException();
         }
@@ -46,7 +48,7 @@ public class NodeParserService(IConsole console, Node content)
 
         while (true)
         {
-            if (!ParseNode(content).Success)
+            if (!Parse(content).Success)
                 break;
         }
     }
@@ -90,9 +92,9 @@ public class NodeParserService(IConsole console, Node content)
         return new Result { State = State.Success }; // true to not exist the application
     }
 
-    private Result QuestionMultipleResponses(Node node)
+    private Result ParseQuestionMultipleResponses(Node node)
     {
-        console.WriteLine($"Number of answers: {node.MultipleAnswer.Count} (click on enter between each response)");
+        console.WriteLine($"{node.MultipleAnswer.Count} answers needed (click on enter between each response)");
                     
         var answers = new List<string>();
         var count = 1;
@@ -127,19 +129,19 @@ public class NodeParserService(IConsole console, Node content)
             console.BreakLine()
                 .Write("Missing responses:'")
                 .Write("❌  ");
-            foreach (var goodAnswer in node.MultipleAnswer)
+            for (var j = 0; j < node.MultipleAnswer.Count; j++)
             {
-                if (!answers.Contains(goodAnswer))
+                if (!answers.Contains(node.MultipleAnswer[j]))
                 {
-                    console.Write($" {goodAnswer} - ");
+                    console.Write($"{node.MultipleAnswer[j]}");
+                    if (j != node.MultipleAnswer.Count - 1)
+                    {
+                        console.Write(" ; ");
+                    }
                 }
             }
+            console.BreakLine().BreakLine();
         }
-        
-        // console.WriteLine();
-        // console.WriteLine($"Score final: {successAnswer}/{children.Count} réponses correctes !");
-        // console.WriteLine();
-        // console.ReadKey();
         
         return result;
     }
@@ -188,69 +190,13 @@ public class NodeParserService(IConsole console, Node content)
         {
             console.WriteLine($"{i+1}/{children.Count} - {children[i].Question} ?")
                 .BreakLine();
-            if (node.Children[i].Type == PageType.Question)
-            {
-                var result = ParseQuestion(children[i]);
-
-                if(result.State == State.Success) successAnswer++;
-                else if (result.State == State.Failed) wrongAnswers.Add(node.Children[i]);
-                else if (result.State == State.Exit) break;
-                else throw new Exception($"Unhandle state: {result.State}");
-            }
-            else if(node.Children[i].Type == PageType.QuestionMultipleResponses)
-            {
-                    console.WriteLine($"{children[i].MultipleAnswer.Count} answers needed (click on enter between each response)");
-                    
-                    var answers = new List<string>();
-                    var count = 1;
-                    foreach (var unused in children[i].MultipleAnswer)
-                    {
-                        console.Write($"{count++} - ");
-                        var inputMultiple = console.ReadLine();
-                        while (string.IsNullOrEmpty(inputMultiple))
-                        {
-                            console.WriteLine("Invalid choice. Please try again...");
-                            inputMultiple = console.ReadLine();
-                        }
-                        if (inputMultiple == "exit()")
-                        {
-                            break;
-                        }
-                        answers.Add(inputMultiple);
-                        
-                    }
-                    var areEqual = children[i].MultipleAnswer.OrderBy(x => x).SequenceEqual(answers.OrderBy(x => x));
-                    if (areEqual)
-                    {
-                        successAnswer++;
-                        console.BreakLine().WriteLine("✅ - Correct, all response are good!")
-                            .BreakLine();
-                    }
-                    else
-                    {
-                        wrongAnswers.Add(node.Children[i]);
-                        console.BreakLine()
-                            .Write("Missing responses:'")
-                            .Write("❌  ");
-
-                        for (var j = 0; j < children[i].MultipleAnswer.Count; j++)
-                        {
-                            if (!answers.Contains(children[i].MultipleAnswer[j]))
-                            {
-                                console.Write($"{children[i].MultipleAnswer[j]}");
-                                if (j != children[i].MultipleAnswer.Count - 1)
-                                {
-                                    console.Write(" ; ");
-                                }
-                            }
-                        }
-                        console.BreakLine().BreakLine();
-                    }
-            }
-            else
-            {
-                console.WriteLine($"The type of {node.Children[i].Type} is not supported").BreakLine();
-            }
+            
+            var result = Parse(children[i]);
+            if(result.State == State.Success) successAnswer++;
+            else if (result.State == State.Failed) wrongAnswers.Add(node.Children[i]);
+            else if (result.State == State.Exit) break;
+            else throw new Exception($"Unhandle state: {result.State}");
+            
             HandleCommentIfAny(children[i]);
         }
         console.WriteLine($"Score final: {successAnswer}/{children.Count} réponses correctes !");
