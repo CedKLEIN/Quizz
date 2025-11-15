@@ -23,21 +23,14 @@ public class NodeParserService(IConsole console, Node content)
     }
     
     private Result Parse(Node node)
-    {
-        switch (node.Type)
+        => node.Type switch
         {
-            case PageType.Menu:
-                return ParseNode(node);
-            case PageType.Quiz:
-                return ParseQuiz(node);
-            case PageType.Question:
-                return ParseQuestion(node);
-            case PageType.QuestionMultipleResponses:
-                return ParseQuestionMultipleResponses(node);
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-    }
+            PageType.Menu => ParseMenu(node),
+            PageType.Quiz => ParseQuiz(node),
+            PageType.Question => ParseQuestion(node),
+            PageType.QuestionMultipleResponses => ParseQuestionMultipleResponses(node),
+            _ => throw new ArgumentOutOfRangeException()
+        };
     
     public void Parse()
     {
@@ -53,7 +46,7 @@ public class NodeParserService(IConsole console, Node content)
         }
     }
 
-    private Result ParseNode(Node node)
+    private Result ParseMenu(Node node)
     {
         var result = new Result();
         
@@ -89,7 +82,7 @@ public class NodeParserService(IConsole console, Node content)
         var selectedChild = node.Children[choice - 1];
         Parse(selectedChild);
         
-        return new Result { State = State.Success }; // true to not exist the application
+        return new Result { State = State.Success }; // force true to not exist the application
     }
 
     private Result ParseQuestionMultipleResponses(Node node)
@@ -193,7 +186,7 @@ public class NodeParserService(IConsole console, Node content)
             
             var result = Parse(children[i]);
             if(result.State == State.Success) successAnswer++;
-            else if (result.State == State.Failed) wrongAnswers.Add(node.Children[i]);
+            else if (result.State == State.Failed) wrongAnswers.Add(children[i]);
             else if (result.State == State.Exit) break;
             else throw new Exception($"Unhandle state: {result.State}");
             
