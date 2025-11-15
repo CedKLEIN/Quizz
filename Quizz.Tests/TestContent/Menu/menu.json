@@ -12,7 +12,7 @@
           {
             "name": "Monde",
             "label": "Toutes les capitales",
-            "sorted": false,
+            "shuffled": false,
             "type": "quiz",
             "children": [
               {"question": "Afghanistan", "answer": "Kaboul", "continent": "Asie", "type": "question"},
@@ -31,9 +31,20 @@
             "name": "Monde",
             "label": "Trouver tous les pays d'un continent",
             "type": "quiz",
+            "ordering": "true",
             "children": [
               {
                 "question": "Quelles sont tous les pays d'Afriques", "answer": ["Maroc", "Tunisis", "Algerie"], "type": "questionMultipleResponses"
+              }
+            ]
+          },
+          {
+            "name": "Monde",
+            "label": "Trouver tous les pays d'un continent et par ordre alphabetique",
+            "type": "quiz",
+            "children": [
+              {
+                "question": "Quelles sont tous les pays d'Afriques (ordered)", "ordering": true, "answer": ["Algerie", "Maroc", "Tunisis"], "type": "questionMultipleResponses"
               }
             ]
           }

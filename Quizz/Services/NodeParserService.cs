@@ -109,7 +109,8 @@ public class NodeParserService(IConsole console, Node content)
         }
         
         var result = new Result();
-        var areEqual = node.MultipleAnswer.OrderBy(x => x).SequenceEqual(answers.OrderBy(x => x));
+        var ordering = node.Get<bool?>("ordering") ?? false;
+        var areEqual = ordering ? node.MultipleAnswer.SequenceEqual(answers) : node.MultipleAnswer.OrderBy(x => x).SequenceEqual(answers.OrderBy(x => x));
         if (areEqual)
         {
             result.State = State.Success;
@@ -175,7 +176,7 @@ public class NodeParserService(IConsole console, Node content)
         console.WriteLine("Use 'exit()' to leave the quiz")
             .BreakLine();
 
-        var sorted = node.Get<bool?>("sorted") ?? true;
+        var sorted = node.Get<bool?>("shuffled") ?? true;
         var children =  sorted ? SortChildrenRandomly(node) : node.Children;
         var successAnswer = 0;
         var wrongAnswers = new List<Node>();
