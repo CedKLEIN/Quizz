@@ -17,9 +17,11 @@ public class ConsoleService : IConsole
         Console.WriteLine(text);
         return this;
     }
-    
+
     public void ReadKey() => Console.ReadKey();
+
     public string? ReadLine() => Console.ReadLine();
+
     public IConsole BreakLine()
     {
         Console.WriteLine();

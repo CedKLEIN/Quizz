@@ -3,16 +3,16 @@ using Quizz.Interfaces;
 
 namespace Quizz.Tests.Mocks;
 
-public class ConsoleServiceMock: IConsole
+public class ConsoleServiceMock : IConsole
 {
     private readonly StringBuilder _consoleText = new();
-    
+
     private readonly Queue<string> _consoleLines = new();
-    
+
     public string ConsoleText => _consoleText.ToString();
-    
+
     public void AddLine(string line) => _consoleLines.Enqueue(line);
-    
+
     public void Clear() => _consoleText.AppendLine("*Console.Clear()*");
 
     public IConsole Write(string text = "")

@@ -5,7 +5,11 @@ using Quizz.Models;
 
 namespace Quizz.Services;
 
-public class NodeBuilderService(IConsole console, ContentService contentService, RuleEngineService ruleEngineService)
+public class NodeBuilderService(
+    IConsole console,
+    ContentService contentService,
+    RuleEngineService ruleEngineService
+)
 {
     public async Task<Node> BuildAsync()
     {
@@ -20,7 +24,7 @@ public class NodeBuilderService(IConsole console, ContentService contentService,
         await ParseChildAsync(node, Path.Combine(contentService.RootContentPath, node.Name));
         return node;
     }
-    
+
     private async Task ParseChildAsync(Node node, string path)
     {
         node.Children ??= await GetChildrenFromFile(node, path);
@@ -33,7 +37,7 @@ public class NodeBuilderService(IConsole console, ContentService contentService,
             }
         }
     }
-    
+
     private async Task<List<Node>> GetChildrenFromFile(Node node, string path)
     {
         var childrenPath = contentService.ChildPath(path, node.Name);
@@ -42,20 +46,22 @@ public class NodeBuilderService(IConsole console, ContentService contentService,
             console.WriteLine($"File {childrenPath} does not exist");
             return [];
         }
-        
+
         var childrenContent = await File.ReadAllTextAsync(childrenPath);
         var children = JsonSerializer.Deserialize<List<Node>>(childrenContent);
-            
+
         if (children is null)
         {
             console.WriteLine($"Children for path {path} is null");
             return [];
         }
-        
+
         var conditions = node.Conditions;
         if (conditions is not null)
         {
-            children = children.Where(n => ruleEngineService.EvaluateConditions(conditions, n)).ToList();
+            children = children
+                .Where(n => ruleEngineService.EvaluateConditions(conditions, n))
+                .ToList();
         }
 
         return children;

@@ -1,0 +1,8 @@
+﻿[
+  {
+    "question": "What are all the French presidents of the Fifth Republic (in order)?",
+    "ordering": true,
+    "answer": ["Charles de Gaulle", "Georges Pompidou", "Valéry Giscard d’Estaing", "François Mitterrand", "Jacques Chirac", "Nicolas Sarkozy", "François Hollande", "Emmanuel Macron"],
+    "type": "questionMultipleResponses"
+  }
+]

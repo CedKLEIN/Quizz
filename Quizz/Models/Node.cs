@@ -12,17 +12,19 @@ public sealed record Node(
 )
 {
     [JsonExtensionData]
-    public IDictionary<string, JsonElement> Properties { get; init; } = new Dictionary<string, JsonElement>();
+    public IDictionary<string, JsonElement> Properties { get; init; } =
+        new Dictionary<string, JsonElement>();
 
     public string? Question => Get<string>("question");
     public string? Answer => Get<string>("answer");
     public List<string>? MultipleAnswer => Get<List<string>>("answer");
-    
+
     public Conditions? Conditions => Get<Conditions>("conditions");
-    
+
     public T? Get<T>(string propertyName)
     {
-        if (!Properties.TryGetValue(propertyName, out var element)) return default;
+        if (!Properties.TryGetValue(propertyName, out var element))
+            return default;
         try
         {
             return element.Deserialize<T>();
@@ -32,7 +34,7 @@ public sealed record Node(
             return default;
         }
     }
-    
+
     [JsonPropertyName("children")]
     public List<Node>? Children { get; set; }
 }

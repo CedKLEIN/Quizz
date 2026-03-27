@@ -76,6 +76,7 @@
   {"question": "Îles Cook", "answer": "Avarua", "continent": "Océanie", "type": "question"},
   {"question": "Îles Marshall", "answer": "Majuro", "continent": "Océanie", "type": "question"},
   {"question": "Îles Salomon", "answer": "Honiara", "continent": "Océanie", "type": "question"},
+  {"question": "Îles Turques-et-Caïques", "answer": "Cockburn Town", "continent": "Amérique du Nord et Centrale", "type": "question"},
   {"question": "Inde", "answer": "New Delhi", "continent": "Asie", "type": "question"},
   {"question": "Indonésie", "answer": "Nusantara", "comment": "Ancienne: Jakarta","continent": "Asie", "type": "question"},
   {"question": "Irak", "answer": "Bagdad", "continent": "Asie", "type": "question"},
@@ -194,6 +195,7 @@
   {"question": "Vatican", "answer": "Cité du Vatican", "continent": "Europe", "type": "question"},
   {"question": "Vénézuéla", "answer": "Caracas", "continent": "Amérique du Sud", "type": "question"},
   {"question": "Vietnam", "answer": "Hanoï", "continent": "Asie", "type": "question"},
+  {"question": "Wallis Et Futuna", "answer": "Mata'utu", "comment": "Collectivités d’outre-mer (COM), appartient a la France", "continent": "Océanie", "type": "question"},
   {"question": "Yémen", "answer": "Sanaa", "continent": "Asie", "type": "question"},
   {"question": "Zambie", "answer": "Lusaka", "continent": "Afrique", "type": "question"},
   {"question": "Zimbabwe", "answer": "Harare", "continent": "Afrique", "type": "question"}

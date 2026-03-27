@@ -13,7 +13,7 @@ public class RuleEngineService
         {
             Operator.And => evaluations.All(r => r),
             Operator.Or => evaluations.Any(r => r),
-            _ => false
+            _ => false,
         };
     }
 
@@ -24,14 +24,14 @@ public class RuleEngineService
         {
             return false;
         }
-        
+
         return item.Rule switch
         {
             RuleType.Equals => string.Equals(value, item.Value, StringComparison.OrdinalIgnoreCase),
             RuleType.StartsWith => value.StartsWith(item.Value, StringComparison.OrdinalIgnoreCase),
             RuleType.EndsWith => value.EndsWith(item.Value, StringComparison.OrdinalIgnoreCase),
             RuleType.Contains => value.Contains(item.Value, StringComparison.OrdinalIgnoreCase),
-            _ => false
+            _ => false,
         };
     }
 }
