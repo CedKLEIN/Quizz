@@ -1,16 +1,22 @@
-﻿using Quizz.Enums;
+﻿using Quizz.Configuration;
+using Quizz.Enums;
 using Quizz.Services;
 
 namespace Quizz.Tests.Services;
 
 public class NodeBuilderServiceTests
 {
+    private readonly QuizzConfiguration _configuration = new()
+    {
+        BaseDirectoryName = "TestContent",
+    };
+
     [Test]
     public async Task Build()
     {
         var nodeBuilderService = new NodeBuilderService(
             new ConsoleService(),
-            new ContentService("TestContent"),
+            new ContentService(_configuration),
             new RuleEngineService()
         );
         var rootNode = await nodeBuilderService.BuildAsync();

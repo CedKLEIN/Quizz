@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Quizz.Configuration;
 using Quizz.Interfaces;
 using Quizz.Services;
 
@@ -19,6 +20,7 @@ internal abstract class Program
         builder.Services.AddSingleton<RuleEngineService>();
         builder.Services.AddSingleton<NodeBuilderService>();
         builder.Services.AddSingleton<NodeParserService>();
+        builder.Services.AddSingleton<QuizzConfiguration>();
 
         var host = builder.Build();
         var nodeParser = host.Services.GetRequiredService<NodeParserService>();

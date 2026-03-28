@@ -40,7 +40,7 @@ public class NodeBuilderService(
 
     private async Task<List<Node>> GetChildrenFromFile(Node node, string path)
     {
-        var childrenPath = contentService.ChildPath(path, node.Name);
+        var childrenPath = contentService.ChildPath(path);
         if (!File.Exists(childrenPath))
         {
             console.WriteLine($"File {childrenPath} does not exist");

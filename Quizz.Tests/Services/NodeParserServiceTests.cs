@@ -1,17 +1,23 @@
-﻿using Quizz.Services;
+﻿using Quizz.Configuration;
+using Quizz.Services;
 using Quizz.Tests.Mocks;
 
 namespace Quizz.Tests.Services;
 
 public class NodeParserServiceTests
 {
+    private readonly QuizzConfiguration _configuration = new()
+    {
+        BaseDirectoryName = "TestContent",
+    };
+
     [Test]
     public async Task Menu_LeaveApp()
     {
         var console = new ConsoleServiceMock();
         var nodeBuilderService = new NodeBuilderService(
             console,
-            new ContentService("TestContent"),
+            new ContentService(_configuration),
             new RuleEngineService()
         );
 
@@ -44,7 +50,7 @@ public class NodeParserServiceTests
         var console = new ConsoleServiceMock();
         var nodeBuilderService = new NodeBuilderService(
             console,
-            new ContentService("TestContent"),
+            new ContentService(_configuration),
             new RuleEngineService()
         );
 
@@ -96,7 +102,7 @@ public class NodeParserServiceTests
         var console = new ConsoleServiceMock();
         var nodeBuilderService = new NodeBuilderService(
             console,
-            new ContentService("TestContent"),
+            new ContentService(_configuration),
             new RuleEngineService()
         );
 
@@ -152,7 +158,7 @@ public class NodeParserServiceTests
         var console = new ConsoleServiceMock();
         var nodeBuilderService = new NodeBuilderService(
             console,
-            new ContentService("TestContent"),
+            new ContentService(_configuration),
             new RuleEngineService()
         );
 
@@ -252,7 +258,7 @@ public class NodeParserServiceTests
         var console = new ConsoleServiceMock();
         var nodeBuilderService = new NodeBuilderService(
             console,
-            new ContentService("TestContent"),
+            new ContentService(_configuration),
             new RuleEngineService()
         );
 
@@ -364,7 +370,7 @@ public class NodeParserServiceTests
         var console = new ConsoleServiceMock();
         var nodeBuilderService = new NodeBuilderService(
             console,
-            new ContentService("TestContent"),
+            new ContentService(_configuration),
             new RuleEngineService()
         );
 
@@ -446,7 +452,7 @@ public class NodeParserServiceTests
         var console = new ConsoleServiceMock();
         var nodeBuilderService = new NodeBuilderService(
             console,
-            new ContentService("TestContent"),
+            new ContentService(_configuration),
             new RuleEngineService()
         );
 
@@ -526,7 +532,7 @@ public class NodeParserServiceTests
         var console = new ConsoleServiceMock();
         var nodeBuilderService = new NodeBuilderService(
             console,
-            new ContentService("TestContent"),
+            new ContentService(_configuration),
             new RuleEngineService()
         );
 
@@ -615,7 +621,7 @@ public class NodeParserServiceTests
         var console = new ConsoleServiceMock();
         var nodeBuilderService = new NodeBuilderService(
             console,
-            new ContentService("TestContent"),
+            new ContentService(_configuration),
             new RuleEngineService()
         );
 
