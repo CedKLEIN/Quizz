@@ -15,6 +15,12 @@ public sealed record Node(
     public IDictionary<string, JsonElement> Properties { get; init; } =
         new Dictionary<string, JsonElement>();
 
+    // Type Quizz
+    public bool Shuffle => Get<bool?>("shuffle") ?? true;    
+    public Direction Direction => Get<Direction?>("direction") ?? Direction.Forward;    
+    
+    
+    // Type Question
     public string? Question => Get<string>("question");
     public string? Answer => Get<string>("answer");
     public List<string>? MultipleAnswer => Get<List<string>>("answer");

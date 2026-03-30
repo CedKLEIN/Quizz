@@ -445,6 +445,90 @@ public class NodeParserServiceTests
             )
         );
     }
+    
+    [Test]
+    public async Task Menu_Quizz_Direction_Reverse()
+    {
+        var console = new ConsoleServiceMock();
+        var nodeBuilderService = new NodeBuilderService(
+            console,
+            new ContentService(new QuizzConfiguration
+            {
+                BaseDirectoryName = "TestContentDirectionReverse"
+            }),
+            new RuleEngineService()
+        );
+
+        var nodeParserService = new NodeParserService(console, nodeBuilderService);
+
+        console.AddLine("1");
+        console.AddLine("1");
+        console.AddLine("1");
+        console.AddLine("Wrong answer");
+        console.AddLine("exit()");
+        console.AddLine("No");
+        console.AddLine("0");
+        await nodeParserService.StartAsync();
+
+        Console.WriteLine(console.ConsoleText);
+
+        Assert.That(
+            console.ConsoleText,
+            Is.EqualTo(
+                """
+                *Console.Clear()*
+                Which theme for the quiz ?
+
+                1. Geography
+                0. Back
+
+                1
+
+                *Console.Clear()*
+                Geography
+
+                1. Capitals
+                0. Back
+
+                1
+
+                *Console.Clear()*
+                Capitals
+
+                1. Toutes les capitales
+                0. Back
+
+                1
+
+                *Console.Clear()*
+                Use 'exit()' to leave the quiz
+
+                1/3 - Kaboul ?
+
+                Wrong answer
+
+                ❌ - Incorrect, the answer is 'Afghanistan'
+
+                2/3 - Pretoria ?
+
+                exit()
+                Score final: 0/3 réponses correctes !
+
+                Veux-tu un sommaire des réponses fausses ?
+                No
+                *Console.Clear()*
+                Which theme for the quiz ?
+
+                1. Geography
+                0. Back
+
+                0
+
+
+                """
+            )
+        );
+    }
 
     [Test]
     public async Task Menu_Quizz_QuestionMultipleResponses_Ordered_Success()

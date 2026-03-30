@@ -27,7 +27,7 @@ public class NodeParserService(IConsole console, NodeBuilderService nodeBuilderS
         {
             PageType.Menu => ParseMenu(node),
             PageType.Quiz => ParseQuiz(node),
-            PageType.Question => ParseQuestion(node),
+            PageType.Question => ParseQuestion(node.Answer),
             PageType.QuestionMultipleResponses => ParseQuestionMultipleResponses(node),
             _ => throw new ArgumentOutOfRangeException(),
         };
@@ -140,7 +140,7 @@ public class NodeParserService(IConsole console, NodeBuilderService nodeBuilderS
         return result;
     }
 
-    private Result ParseQuestion(Node node)
+    private Result ParseQuestion(string? answer)
     {
         var input = console.ReadLine();
         while (string.IsNullOrEmpty(input))
@@ -154,47 +154,48 @@ public class NodeParserService(IConsole console, NodeBuilderService nodeBuilderS
             return new Result { State = State.Exit };
         }
 
-        if (input == node.Answer)
+        if (input == answer)
         {
             console.BreakLine().WriteLine("✅ - Correct!").BreakLine();
 
             return new Result { State = State.Success };
         }
-        else
-        {
-            console
-                .BreakLine()
-                .WriteLine($"❌ - Incorrect, the answer is '{node.Answer}'")
-                .BreakLine();
 
-            return new Result { State = State.Failed };
-        }
+        console
+            .BreakLine()
+            .WriteLine($"❌ - Incorrect, the answer is '{answer}'")
+            .BreakLine();
+
+        return new Result { State = State.Failed };
     }
 
     private Result ParseQuiz(Node node)
     {
         console.Clear();
         console.WriteLine("Use 'exit()' to leave the quiz").BreakLine();
-
-        var sorted = node.Get<bool?>("shuffled") ?? true;
-        var children = sorted ? SortChildrenRandomly(node) : node.Children;
+        
+        var children = node.Shuffle ? SortChildrenRandomly(node) : node.Children;
         var successAnswer = 0;
         var wrongAnswers = new List<Node>();
-        for (var i = 0; i < children.Count; i++)
+        var i = 1;
+        var direction = node.Direction;
+        foreach(var child in children)
         {
-            console.WriteLine($"{i + 1}/{children.Count} - {children[i].Question} ?").BreakLine();
+            var (question, answer) = GetQuestionAnswer(child, direction);
+            console.WriteLine($"{i}/{children.Count} - {question} ?").BreakLine();
 
-            var result = Parse(children[i]);
+            var result = child.Type == PageType.Question ? ParseQuestion(answer) : ParseQuestionMultipleResponses(child);
             if (result.State == State.Success)
                 successAnswer++;
             else if (result.State == State.Failed)
-                wrongAnswers.Add(children[i]);
+                wrongAnswers.Add(child);
             else if (result.State == State.Exit)
                 break;
             else
                 throw new Exception($"Unhandle state: {result.State}");
 
-            HandleCommentIfAny(children[i]);
+            HandleCommentIfAny(child);
+            i++;
         }
         console.WriteLine($"Score final: {successAnswer}/{children.Count} réponses correctes !");
 
@@ -222,6 +223,29 @@ public class NodeParserService(IConsole console, NodeBuilderService nodeBuilderS
         }
 
         return new Result { State = State.Success };
+    }
+
+    private (string? Question, string? Answer) GetQuestionAnswer(Node child, Direction direction)
+    {
+        while (true)
+        {
+            switch (direction)
+            {
+                case Direction.Forward:
+                    return (child.Question, child.Answer);
+                case Direction.Reverse:
+                    return (child.Answer, child.Question);
+                case Direction.Random:
+                {
+                    var isForward = new Random().Next() % 2 == 0;
+                    direction = isForward ? Direction.Forward : Direction.Reverse;
+                    continue;
+                }
+                default:
+                    direction = Direction.Forward;
+                    continue;
+            }
+        }
     }
 
     private static List<Node> SortChildrenRandomly(Node node)

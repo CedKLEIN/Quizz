@@ -12,7 +12,7 @@
           {
             "name": "Monde",
             "label": "Toutes les capitales",
-            "shuffled": false,
+            "shuffle": false,
             "type": "quiz",
             "children": [
               {"question": "Afghanistan", "answer": "Kaboul", "continent": "Asie", "type": "question"},
