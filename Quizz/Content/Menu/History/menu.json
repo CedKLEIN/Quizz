@@ -22,5 +22,22 @@
         }
       ]
     }
+  },
+  {
+    "name": "Moyen-Age",
+    "label": "Trouves les dates des dynaties ? (Format attendu: 1119-1234)",
+    "type": "quiz",
+    "shuffle": true,
+    "direction": "Forward",
+    "conditions": {
+      "operator": "Or",
+      "items": [
+        {
+          "field": "subType",
+          "value": "dynasty",
+          "rule": "Equals"
+        }
+      ]
+    }
   }
 ]
