@@ -1,12 +1,22 @@
 ﻿[
   {"question": "Childéric Ier", "answer": "457-481", "type": "question", "subType": "king"},
   {"question": "Clovis Ier", "answer": "481-511", "type": "question", "subType": "king"},
-  {"question": "Clodomir", "answer": "511-524", "type": "question", "subType": "king"},
-  {"question": "Childebert Ier", "answer": "511-558", "type": "question", "subType": "king"},
-  {"question": "Clotaire Ier", "answer": "511-561", "type": "question", "subType": "king", "comment": "Il ne règne seul qu’à partir de 558 (avant royaume partagé)"  },
-  {"question": "Charibert Ier", "answer": "561-567", "type": "question", "subType": "king"},
-  {"question": "Clotaire II", "answer": "584-629", "type": "question", "subType": "king"},
-  {"question": "Dagobert Ier", "answer": "629-639", "type": "question", "subType": "king"},
+
+  {"question": "Thierry Ier", "answer": "511-534", "type": "question", "subType": "king", "comment": "Roi de Reims (Austrasie), royaume divisé"},
+  {"question": "Clodomir", "answer": "511-524", "type": "question", "subType": "king", "comment": "Roi d’Orléans, royaume divisé"},
+  {"question": "Childebert Ier", "answer": "511-558", "type": "question", "subType": "king", "comment": "Roi de Paris, royaume divisé"},
+  {"question": "Clotaire Ier", "answer": "511-561", "type": "question", "subType": "king", "comment": "Roi de Soissons puis roi unique à partir de 558"},
+
+  {"question": "Charibert Ier", "answer": "561-567", "type": "question", "subType": "king", "comment": "Roi de Paris, royaume divisé"},
+  {"question": "Gontran", "answer": "561-592", "type": "question", "subType": "king", "comment": "Roi de Bourgogne, royaume divisé"},
+  {"question": "Sigebert Ier", "answer": "561-575", "type": "question", "subType": "king", "comment": "Roi d’Austrasie, royaume divisé"},
+  {"question": "Chilpéric Ier", "answer": "561-584", "type": "question", "subType": "king", "comment": "Roi de Neustrie, royaume divisé"},
+
+  {"question": "Childebert II", "answer": "575-596", "type": "question", "subType": "king", "comment": "Roi d’Austrasie puis de Bourgogne, royaume divisé"},
+  {"question": "Clotaire II", "answer": "584-629", "type": "question", "subType": "king", "comment": "Roi de Neustrie puis roi unique à partir de 613"},
+
+  {"question": "Dagobert Ier", "answer": "629-639", "type": "question", "subType": "king", "comment": "Roi des Francs (quasi unifié, dernier grand Mérovingien)"},
+
   {"question": "Clovis II", "answer": "639-657", "type": "question", "subType": "king"},
   {"question": "Clotaire III", "answer": "657-673", "type": "question", "subType": "king"},
   {"question": "Childéric II", "answer": "662-675", "type": "question", "subType": "king", "comment": "Roi d’Austrasie puis de tous les Francs"},
@@ -71,7 +81,7 @@
   {"question": "Napoléon II", "answer": "1815", "type": "question", "subType": "emperor"},
   {"question": "Louis XVIII", "answer": "1814-1824", "type": "question", "subType": "king"},
   {"question": "Charles X", "answer": "1824-1830", "type": "question", "subType": "king"},
-  {"question": "Louis XIX", "answer": "1830", "type": "question", "subType": "king"},
+  {"question": "Louis XIX", "answer": "1830", "type": "question", "subType": "king", "comment": "A régné environ 20 minutes, considéré comme le règne le plus court de l'histoire"},
   {"question": "Henri V", "answer": "1830", "type": "question", "subType": "king"},
   {"question": "Louis-Philippe Ier", "answer": "1830-1848", "type": "question", "subType": "king"},
   
@@ -99,22 +109,22 @@
   {"question": "Nicolas Sarkozy", "answer": "2007-2012", "type": "question", "subType": "president"},
   {"question": "François Hollande", "answer": "2012-2017", "type": "question", "subType": "president"},
   {"question": "Emmanuel Macron", "answer": "2017-présent", "type": "question", "subType": "president"},
-
-  {"question": "Première République", "answer": "1792-1804", "type": "question", "subType": "regime"},
-  {"question": "Consulat", "answer": "1799-1804", "type": "question", "subType": "regime"},
-  {"question": "Premier Empire", "answer": "1804-1814/1815", "type": "question", "subType": "regime"},
-  {"question": "Monarchie de Juillet", "answer": "1830-1848", "type": "question", "subType": "regime"},
-  {"question": "Deuxième République", "answer": "1848-1852", "type": "question", "subType": "regime"},
-  {"question": "Second Empire", "answer": "1852-1870", "type": "question", "subType": "regime"},
-  {"question": "Troisième République", "answer": "1870-1940", "type": "question", "subType": "regime"},
-  {"question": "Régime de Vichy", "answer": "1940-1944", "type": "question", "subType": "regime"},
-  {"question": "Quatrième République", "answer": "1946-1958", "type": "question", "subType": "regime"},
-  {"question": "Cinquième République", "answer": "1958-présent", "type": "question", "subType": "regime"},
   
   {"question": "Mérovingiens", "answer": "481-751", "type": "question", "subType": "dynasty"},
   {"question": "Carolingiens", "answer": "751-987", "type": "question", "subType": "dynasty"},
   {"question": "Capétiens directs", "answer": "987-1328", "type": "question", "subType": "dynasty"},
   {"question": "Valois", "answer": "1328-1589", "type": "question", "subType": "dynasty"},
   {"question": "Bourbons", "answer": "1589-1792", "type": "question", "subType": "dynasty"},
-  {"question": "Bourbons (Restauration)", "answer": "1814-1830", "type": "question", "subType": "dynasty"}
+  {"question": "Première République", "answer": "1792-1804", "type": "question", "subType": "regime"},
+  {"question": "Consulat", "answer": "1799-1804", "type": "question", "subType": "regime"},
+  {"question": "Premier Empire", "answer": "1804-1814/1815", "type": "question", "subType": "regime"},
+  {"question": "Bourbons (Restauration)", "answer": "1814-1830", "type": "question", "subType": "dynasty"},
+  {"question": "Monarchie de Juillet", "answer": "1830-1848", "type": "question", "subType": "regime"},
+  {"question": "Deuxième République", "answer": "1848-1852", "type": "question", "subType": "regime"},
+  {"question": "Second Empire", "answer": "1852-1870", "type": "question", "subType": "regime"},
+  {"question": "Troisième République", "answer": "1870-1940", "type": "question", "subType": " "},
+  {"question": "Régime de Vichy", "answer": "1940-1944", "type": "question", "subType": "regime"},
+  {"question": "Gouvernement provisoire de la République française", "answer": "1944-1946", "type": "question", "subType": "regime"},
+  {"question": "Quatrième République", "answer": "1946-1958", "type": "question", "subType": "regime"},
+  {"question": "Cinquième République", "answer": "1958-présent", "type": "question", "subType": "regime"}
 ]

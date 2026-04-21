@@ -1,14 +1,14 @@
 ﻿[
   {
     "name": "Moyen-Age",
-    "label": "Trouves les dates des rois et dynaties ? (Format attendu: 1119-1234)",
+    "label": "Associe les rois et dynasties à leurs périodes (dates ou noms selon la question)",
     "type": "quiz",
     "shuffle": true,
     "direction": "Random"
   },
   {
     "name": "Moyen-Age",
-    "label": "Trouves les dates des rois ? (Format attendu: 1119-1234)",
+    "label": "Associe chaque roi à sa période de règne (format attendu: 1119-1234)",
     "type": "quiz",
     "shuffle": true,
     "direction": "Forward",
@@ -25,7 +25,7 @@
   },
   {
     "name": "Moyen-Age",
-    "label": "Trouves les dates des dynaties ? (Format attendu: 1119-1234)",
+    "label": "ssocie chaque dynastie ou régime à sa période (format attendu: 1119-1234)",
     "type": "quiz",
     "shuffle": true,
     "direction": "Forward",
@@ -35,6 +35,11 @@
         {
           "field": "subType",
           "value": "dynasty",
+          "rule": "Equals"
+        },
+        {
+          "field": "subType",
+          "value": "regime",
           "rule": "Equals"
         }
       ]
